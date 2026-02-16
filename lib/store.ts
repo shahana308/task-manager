@@ -1,0 +1,74 @@
+
+import { create } from "zustand";
+
+import { BoardData, Task } from "./types";
+
+ const initialData: BoardData = {
+    tasks: {
+      "task-1": {
+        id: "task-1",
+        title: "Setup project structure",
+        description: "Initialize Next.js with TypeScript and Tailwind",
+        priority: "high",
+        status: "done",
+        assignee: "Shahana",
+        tags: ["setup", "infrastructure"],
+        createdAt: "2024-02-16T08:00:00.000Z",
+      },
+      "task-2": {
+        id: "task-2",
+        title: "Implement drag and drop",
+        description: "Add @dnd-kit for Kanban board functionality",
+        priority: "high",
+        status: "in-progress",
+        assignee: "Shahana",
+        tags: ["feature", "ui"],
+        createdAt: "2024-02-16T09:00:00.000Z",
+      },
+      "task-3": {
+        id: "task-3",
+        title: "Add task creation modal",
+        description: "Build form with Ant Design components",
+        priority: "medium",
+        status: "todo",
+        tags: ["feature", "form"],
+        createdAt: "2024-02-16T10:00:00.000Z",
+      },
+      "task-4": {
+        id: "task-4",
+        title: "Implement filters and search",
+        description: "Add ability to filter tasks by priority, assignee, and tags",
+        priority: "low",
+        status: "todo",
+        tags: ["enhancement"],
+        createdAt: "2024-02-16T11:00:00.000Z",
+      },
+    },
+    columns: {
+      todo: {
+        id: "todo",
+        title: "To Do",
+        taskIds: ["task-3", "task-4"],
+      },
+      "in-progress": {
+        id: "in-progress",
+        title: "In Progress",
+        taskIds: ["task-2"],
+      },
+      done: {
+        id: "done",
+        title: "Done",
+        taskIds: ["task-1"],
+      },
+    },
+    columnOrder: ["todo", "in-progress", "done"],
+  };
+
+  export const useBoardStore = create<BoardData>((set) => ({
+    ...initialData,
+    addTask: (task: Task) => {
+      set((state) => ({
+        tasks: { ...state.tasks, [task.id]: task },
+      }));
+    },
+  }));

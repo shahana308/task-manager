@@ -1,26 +1,36 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  --color-pastel-purple: #c4b5fd;
+  --color-pastel-purple-light: #f3e8ff;
+  --color-pastel-purple-dark: #7c3aed;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-pastel-blue: #7dd3fc;
+  --color-pastel-blue-light: #EBF5FB;
+  --color-pastel-blue-dark: #0284c7;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-pastel-green: #86efac;
+  --color-pastel-green-light: #dcfce7;
+  --color-pastel-green-dark: #16a34a;
+
+  --color-pastel-yellow: #fde047;
+  --color-pastel-yellow-light: #FEF9E7;
+  --color-pastel-yellow-dark: #ca8a04;
+
+  --color-pastel-orange: #fdba74;
+  --color-pastel-orange-light: #ffedd5;
+  --color-pastel-orange-dark: #ea580c;
+
+  --color-pastel-red: #fca5a5;
+  --color-pastel-red-light: #fee2e2;
+  --color-pastel-red-dark: #dc2626;
+
+  --color-pastel-gray: #f3f4f6;
+  --color-pastel-gray-light: #f9fafb;
+  --color-pastel-gray-dark: #6b7280;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
