@@ -2,13 +2,19 @@ export type Priority = "low" | "medium" | "high";
 
 export type Status = "todo" | "in-progress" | "done";
 
+export interface Assignee {
+  name: string;
+  avatar?: string;
+}
+
 export interface Task {
     id: string;
+    taskCode: string;
     title: string;
     description: string;
     priority: Priority;
     status: Status;
-    assignee?: string;
+    assignee?: Assignee;
     dueDate?: string;
     tags?: string[];
     createdAt: string;
