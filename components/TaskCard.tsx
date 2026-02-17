@@ -4,7 +4,7 @@ import AssigneeAvatar from './Avatar';
 
 const TaskCard = ({ task, border }: { task: Task, border: string }) => {
   const { bg, text } = priorityColorMap[task.priority] || priorityColorMap.default;
-  
+
   return (
     <article className={`
         bg-white min-w-74 p-4 

@@ -28,4 +28,4 @@ const Avatar = ({ assignee }: { assignee: Assignee }) => {
   );
 };
 
-export default  Avatar;
+export default Avatar;

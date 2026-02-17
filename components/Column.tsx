@@ -8,7 +8,7 @@ const Column = ({ id, title, taskIds }: ColumnType) => {
   const { tasks } = useBoardStore();
   const columnTasks = taskIds.map((taskId) => tasks[taskId]);
 
-  const {bg, dot, border} = columnColorMap[id] || columnColorMap.default;
+  const { bg, dot, border } = columnColorMap[id] || columnColorMap.default;
 
   return (
     <section aria-label={title}>
@@ -22,11 +22,11 @@ const Column = ({ id, title, taskIds }: ColumnType) => {
         <span className="ml-auto text-xs text-gray-400 font-medium px-2 py-0.2 bg-gray-100">
           {columnTasks.length}
         </span>
-      </div>      
+      </div>
       <div className={`${bg} rounded-xl p-4 my-2 min-h-full`}>
-          {columnTasks.map((task) => (
-            <TaskCard key={task.id} task={task} border={border} />
-          ))}
+        {columnTasks.map((task) => (
+          <TaskCard key={task.id} task={task} border={border} />
+        ))}
       </div>
     </section>
   )
