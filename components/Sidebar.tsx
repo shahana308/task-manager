@@ -2,9 +2,9 @@ import React from 'react'
 
 const Sidebar = () => {
   return (
-    <div className='w-1/6 h-full bg-pastel-purple-light  min-h-screen px-4 py-8'>
+    <aside className='w-1/6 h-full bg-pastel-purple-light  min-h-screen px-4 py-8'>
      <h1 className='text-lg font-bold text-pastel-gray-dark'>PROJECTLY</h1>
-    </div>
+    </aside>
   )
 }
 
