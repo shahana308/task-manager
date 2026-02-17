@@ -6,7 +6,12 @@ const TaskCard = ({ task, border }: { task: Task, border: string }) => {
   const { bg, text } = priorityColorMap[task.priority] || priorityColorMap.default;
   
   return (
-    <article className={`bg-white min-w-74 p-4 rounded-md shadow-md border ${border} mb-4 flex flex-col gap-2`}>
+    <article className={`
+        bg-white min-w-74 p-4 
+        rounded-md shadow-md 
+        border ${border} mb-4 
+        flex flex-col gap-2 
+        hover:scale-[1.02] hover:shadow-md`}>
       <header>
         <div className={`${bg} inline-flex w-fit py-1 px-2 rounded-full`}>
           <p className={`${text} text-[11px] font-semibold`}>
