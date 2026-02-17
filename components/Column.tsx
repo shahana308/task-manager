@@ -19,7 +19,7 @@ const Column = ({ id, title, taskIds }: ColumnType) => {
         <p className="text-xs font-semibold text-gray-500">
           {title.toUpperCase()}
         </p>
-        <span className="ml-auto text-xs text-gray-400 font-medium">
+        <span className="ml-auto text-xs text-gray-400 font-medium px-2 py-0.2 bg-gray-100">
           {columnTasks.length}
         </span>
       </div>      
