@@ -5,6 +5,7 @@ import { BoardData, Column, Status, Task } from "./types";
 
 interface BoardStore extends BoardData {
   addColumn: (column: Column) => void;
+  addTask: (task: Task) => void;
 }
 
 const initialData: BoardData = {
@@ -90,4 +91,27 @@ export const useBoardStore = create<BoardStore>((set) => ({
       columns: { ...state.columns, [column.id]: column },
     }));
   },
+
+  addTask: (taskData) => {
+    const newTask: Task = {
+      ...taskData,
+      id: `task-${Date.now()}`,
+      createdAt: new Date().toISOString(),
+    };
+
+    set((state) => ({
+      tasks: {
+        ...state.tasks,
+        [newTask.id]: newTask,
+      },
+      columns: {
+        ...state.columns,
+        [newTask.status]: {
+          ...state.columns[newTask.status],
+          taskIds: [...state.columns[newTask.status].taskIds, newTask.id],
+        },
+      },
+    }));
+  },
+
 }));

@@ -1,5 +1,7 @@
 export type Priority = "low" | "medium" | "high";
 
+export const PRIORITIES: Priority[] = ["low", "medium", "high"];
+
 export type Status = "todo" | "in-progress" | "done";
 
 export interface Assignee {
