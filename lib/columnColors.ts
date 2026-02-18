@@ -1,7 +1,5 @@
-import { Status as ColumnType } from '@/lib/types';
-
 export const columnColorMap: Record<
-  ColumnType | "default",
+  string | "default",
   {
     bg: string;
     dot: string;

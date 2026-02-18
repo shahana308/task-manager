@@ -8,26 +8,26 @@ export interface Assignee {
 }
 
 export interface Task {
-    id: string;
-    taskCode: string;
-    title: string;
-    description: string;
-    priority: Priority;
-    status: Status;
-    assignee?: Assignee;
-    dueDate?: string;
-    tags?: string[];
-    createdAt: string;
+  id: string;
+  taskCode: string;
+  title: string;
+  description: string;
+  priority: Priority;
+  status: string;
+  assignee?: Assignee;
+  dueDate?: string;
+  tags?: string[];
+  createdAt: string;
 }
 
 export interface Column {
-  id: Status;
+  id: string;
   title: string;
   taskIds: string[];
 }
 
 export interface BoardData {
   tasks: Record<string, Task>;
-  columns: Record<Status, Column>;
-  columnOrder: Status[];
+  columns: Record<string, Column>;
+  columnOrder: (string)[];
 }  

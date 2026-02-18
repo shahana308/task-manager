@@ -1,4 +1,3 @@
-import React from 'react'
 import TaskCard from './TaskCard';
 import { useBoardStore } from '@/lib/store';
 import { Column as ColumnType } from '@/lib/types';
@@ -11,7 +10,7 @@ const Column = ({ id, title, taskIds }: ColumnType) => {
   const { bg, dot, border } = columnColorMap[id] || columnColorMap.default;
 
   return (
-    <section aria-label={title}>
+    <section aria-label={title} className='min-w-74'>
       <div className="flex items-center gap-2 px-1 mb-2">
         <span
           className={`${dot} inline-block w-2.5 h-2.5 rounded-full`}

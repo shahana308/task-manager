@@ -7,7 +7,7 @@ const TaskCard = ({ task, border }: { task: Task, border: string }) => {
 
   return (
     <article className={`
-        bg-white min-w-74 p-4 
+        bg-white p-4 
         rounded-md shadow-md 
         border ${border} mb-4 
         flex flex-col gap-2 
