@@ -7,6 +7,7 @@ interface BoardStore extends BoardData {
   addColumn: (column: Column) => void;
   addTask: (task: Task) => void;
   moveTask: (taskId: string, status: string, index: number) => void;
+  updateTask: (taskId: string, patch: Partial<Task>) => void;
 }
 
 const initialData: BoardData = {
@@ -180,4 +181,20 @@ export const useBoardStore = create<BoardStore>((set) => ({
       };
     });
   },
+  updateTask: (taskId, patch) =>
+    set((state) => {
+      const existing = state.tasks[taskId];
+      if (!existing) return state;
+
+      const updated: Task = { ...existing, ...patch };
+
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [taskId]: updated,
+        },
+      };
+    }),
+
 }));

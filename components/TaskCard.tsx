@@ -2,6 +2,8 @@ import { useDraggable } from '@dnd-kit/react';
 import { Task } from '@/lib/types';
 import { priorityColorMap } from '@/lib/priorityColors';
 import AssigneeAvatar from './Avatar';
+import TaskDrawer from './TaskDrawer';
+import { useState } from 'react';
 
 const TaskCard = ({ task, border, index }: { task: Task; border: string; index: number }) => {
   const { bg, text } = priorityColorMap[task.priority] || priorityColorMap.default;
@@ -10,11 +12,14 @@ const TaskCard = ({ task, border, index }: { task: Task; border: string; index: 
     id: task.id,
     data: { type: 'task', index },
   });
+  const [open, setOpen] = useState(false);
 
   return (
-    <article
-      ref={ref}
-      className={`
+    <>
+      <article
+        ref={ref}
+        onClick={() => setOpen(true)}
+        className={`
         bg-white p-4 
         rounded-md shadow-md 
         border ${border} mb-4 
@@ -24,22 +29,30 @@ const TaskCard = ({ task, border, index }: { task: Task; border: string; index: 
         hover:scale-[1.02] hover:shadow-md
         ${isDragging ? 'opacity-50' : 'opacity-100'}
       `}
-    >
-      <header>
-        <div className={`${bg} inline-flex w-fit py-1 px-2 rounded-full`}>
-          <p className={`${text} text-[11px] font-semibold`}>
-            {task.priority.toUpperCase()}
-          </p>
-        </div>
-      </header>
-      <p className="text-sm font-medium text-gray-800 leading-snug">
-        {task.title}
-      </p>
-      <footer className="flex justify-between items-center">
-        <AssigneeAvatar assignee={task.assignee || { name: 'Unassigned' }} />
-        <span className="text-xs text-gray-500">{task.taskCode}</span>
-      </footer>
-    </article>
+      >
+        <header>
+          <div className={`${bg} inline-flex w-fit py-1 px-2 rounded-full`}>
+            <p className={`${text} text-[11px] font-semibold`}>
+              {task.priority.toUpperCase()}
+            </p>
+          </div>
+        </header>
+        <p className="text-sm font-medium text-gray-800 leading-snug">
+          {task.title}
+        </p>
+        <footer className="flex justify-between items-center">
+          <AssigneeAvatar assignee={task.assignee || { name: 'Unassigned' }} />
+          <span className="text-xs text-gray-500">{task.taskCode}</span>
+        </footer>
+      </article>
+
+
+      <TaskDrawer
+        open={open}
+        taskId={task.id}
+        onClose={() => setOpen(false)}
+      />
+    </>
   );
 };
 
