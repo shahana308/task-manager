@@ -2,6 +2,7 @@ import TaskCard from './TaskCard';
 import { useBoardStore } from '@/lib/store';
 import { Column as ColumnType } from '@/lib/types';
 import { columnColorMap } from '@/lib/columnColors';
+import { useDroppable } from '@dnd-kit/react';
 
 const Column = ({ id, title, taskIds }: ColumnType) => {
   const { tasks } = useBoardStore();
@@ -9,8 +10,12 @@ const Column = ({ id, title, taskIds }: ColumnType) => {
 
   const { bg, dot, border } = columnColorMap[id] || columnColorMap.default;
 
+  const { ref } = useDroppable({
+    id,
+  });
+
   return (
-    <section aria-label={title} className='min-w-74'>
+    <section ref={ref} aria-label={title} className='min-w-74'>
       <div className="flex items-center gap-2 px-1 mb-2">
         <span
           className={`${dot} inline-block w-2.5 h-2.5 rounded-full`}
@@ -23,8 +28,8 @@ const Column = ({ id, title, taskIds }: ColumnType) => {
         </span>
       </div>
       <div className={`${bg} rounded-xl p-4 my-2 min-h-full`}>
-        {columnTasks.map((task) => (
-          <TaskCard key={task.id} task={task} border={border} />
+        {columnTasks.map((task, index) => (
+          <TaskCard key={task.id} task={task} border={border} index={index} />
         ))}
       </div>
     </section>

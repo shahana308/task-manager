@@ -1,11 +1,12 @@
 
 import { create } from "zustand";
 
-import { BoardData, Column, Status, Task } from "./types";
+import { BoardData, Column, Task } from "./types";
 
 interface BoardStore extends BoardData {
   addColumn: (column: Column) => void;
   addTask: (task: Task) => void;
+  moveTask: (taskId: string, status: string, index: number) => void;
 }
 
 const initialData: BoardData = {
@@ -89,6 +90,7 @@ export const useBoardStore = create<BoardStore>((set) => ({
   addColumn: (column: Column) => {
     set((state) => ({
       columns: { ...state.columns, [column.id]: column },
+      columnOrder: [...state.columnOrder, column.id],
     }));
   },
 
@@ -114,4 +116,68 @@ export const useBoardStore = create<BoardStore>((set) => ({
     }));
   },
 
+  moveTask: (taskId: string, destinationColumnId: string, index: number) => {
+    set((state) => {
+      const task = state.tasks[taskId];
+      if (!task) return state;
+
+      const sourceColumnId = task.status;
+
+      // if moving within the same column
+      if (sourceColumnId === destinationColumnId) {
+        const column = state.columns[sourceColumnId];
+        const newTaskIds = [...column.taskIds];
+        const currentIndex = newTaskIds.indexOf(taskId);
+
+        // extract from current position
+        newTaskIds.splice(currentIndex, 1);
+        // insert at new position
+        newTaskIds.splice(index, 0, taskId);
+
+        return {
+          ...state,
+          columns: {
+            ...state.columns,
+            [sourceColumnId]: {
+              ...column,
+              taskIds: newTaskIds,
+            },
+          },
+        };
+      }
+
+      // moving to a different column
+      const sourceColumn = state.columns[sourceColumnId];
+      const destinationColumn = state.columns[destinationColumnId];
+
+      // extract from source column
+      const sourceTaskIds = sourceColumn.taskIds.filter((id) => id !== taskId);
+
+      // insert at destination column at the specified index
+      const destinationTaskIds = [...destinationColumn.taskIds];
+      destinationTaskIds.splice(index, 0, taskId);
+
+      return {
+        ...state,
+        tasks: {
+          ...state.tasks,
+          [taskId]: {
+            ...task,
+            status: destinationColumnId,
+          },
+        },
+        columns: {
+          ...state.columns,
+          [sourceColumnId]: {
+            ...sourceColumn,
+            taskIds: sourceTaskIds,
+          },
+          [destinationColumnId]: {
+            ...destinationColumn,
+            taskIds: destinationTaskIds,
+          },
+        },
+      };
+    });
+  },
 }));
