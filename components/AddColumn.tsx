@@ -29,7 +29,7 @@ const AddColumn = () => {
             {/* Add Column Button */}
             <button
                 onClick={() => setIsModalOpen(true)}
-                className="border-2 border-dashed border-gray-300 rounded-xl bg-white min-w-74 min-h-full mt-6 flex flex-col items-center justify-center hover:border-gray-400 hover:bg-gray-50 transition-colors cursor-pointer"
+                className="border-2 border-dashed border-gray-300 rounded-xl bg-white min-w-74 h-full flex flex-col items-center justify-center hover:border-gray-400 hover:bg-gray-50 transition-colors cursor-pointer"
             >
                 <div className="text-gray-500 text-sm font-medium flex items-center gap-2">
                     <PlusCircleOutlined className="text-lg" />

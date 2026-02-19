@@ -15,8 +15,8 @@ const Column = ({ id, title, taskIds }: ColumnType) => {
   });
 
   return (
-    <section ref={ref} aria-label={title} className='min-w-74'>
-      <div className="flex items-center gap-2 px-1 mb-2">
+    <section ref={ref} aria-label={title} className="min-w-74 h-full flex flex-col">
+      <div className="flex items-center gap-2 px-1">
         <span
           className={`${dot} inline-block w-2.5 h-2.5 rounded-full`}
         />
@@ -27,7 +27,7 @@ const Column = ({ id, title, taskIds }: ColumnType) => {
           {columnTasks.length}
         </span>
       </div>
-      <div className={`${bg} rounded-xl p-4 my-2 min-h-full`}>
+      <div className={`${bg} rounded-xl p-4 flex-1 mt-2 overflow-y-auto`}>
         {columnTasks.map((task, index) => (
           <TaskCard key={task.id} task={task} border={border} index={index} />
         ))}
