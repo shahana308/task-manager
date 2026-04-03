@@ -4,10 +4,12 @@ import { create } from "zustand";
 import { BoardData, Column, Task } from "./types";
 
 interface BoardStore extends BoardData {
+  searchQuery: string;
   addColumn: (column: Column) => void;
   addTask: (task: Task) => void;
   moveTask: (taskId: string, status: string, index: number) => void;
   updateTask: (taskId: string, patch: Partial<Task>) => void;
+  setSearchQuery: (query: string) => void;
 }
 
 const initialData: BoardData = {
@@ -87,6 +89,7 @@ const initialData: BoardData = {
 
 export const useBoardStore = create<BoardStore>((set) => ({
   ...initialData,
+  searchQuery: '',
 
   addColumn: (column: Column) => {
     set((state) => ({
@@ -196,5 +199,9 @@ export const useBoardStore = create<BoardStore>((set) => ({
         },
       };
     }),
+  setSearchQuery: (query) =>
+    set(() => ({
+      searchQuery: query,
+    })),
 
 }));

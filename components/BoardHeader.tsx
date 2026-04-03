@@ -12,6 +12,8 @@ const BoardHeader = () => {
   const [form] = Form.useForm();
   const addTask = useBoardStore((state) => state.addTask);
   const columns = useBoardStore((state) => state.columns);
+  const searchQuery = useBoardStore((state) => state.searchQuery);
+  const setSearchQuery = useBoardStore((state) => state.setSearchQuery);
 
   const handleAddTask = () => {
     form.validateFields().then((values) => {
@@ -51,6 +53,8 @@ const BoardHeader = () => {
           placeholder="Search tasks..."
           className="!w-64 rounded-full bg-gray-50"
           variant="filled"
+          value={searchQuery}
+          onChange={(event) => setSearchQuery(event.target.value)}
         />
       </div>
 
